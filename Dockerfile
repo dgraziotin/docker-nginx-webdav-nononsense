@@ -1,6 +1,8 @@
 # Builds a modern no-nonsense WEBDAV system with NGINX, to be put in front of a reverse proxy for SSL
-# Inspiration (=copy paste) from https://www.robpeck.com/2020/06/making-webdav-actually-work-on-nginx/ go buy something from [their Amazon.com wishlist](https://www.amazon.com/hz/wishlist/ls/2XJI6HVS09C4J)
-# Added small fixes for future upgrades and dependencies
+# Based on linuxserver.io Ubuntu, so all their magic is here, too.
+# Inspired (=copy paste) by https://www.robpeck.com/2020/06/making-webdav-actually-work-on-nginx/ 
+#   Go buy something from [their Amazon.com wishlist](https://www.amazon.com/hz/wishlist/ls/2XJI6HVS09C4J)
+#   Added small fixes for future upgrades and dependencies
 # FAQ: 
 # Q: Will you add SSL? N: No, I can't bother, I use a reverse proxy. Pull requests are welcome!
 
@@ -12,21 +14,36 @@ ENV NGINX_VER 1.19.5
 ENV NGINX_DAV_EXT_VER 3.0.0
 ENV NGINX_FANCYINDEX_VER 0.5.1
 ENV HEADERS_MORE_VER 0.33
+
 ENV MAKE_THREADS 4
 ENV DEBIAN_FRONTEND noninteractive
 ENV LANG C.UTF-8
 ENV APT_LISTCHANGES_FRONTEND none
 
-RUN apt-get update && apt-get -y install build-essential libcurl4-openssl-dev libxml2-dev mime-support automake libssl-dev libpcre3-dev zlib1g-dev libxslt1-dev wget libgd-dev libgeoip-dev libperl-dev apache2-utils
+RUN apt-get update && \
+  apt-get -y install build-essential \
+  libcurl4-openssl-dev \
+  libxml2-dev mime-support \
+  automake \
+  libssl-dev \
+  libpcre3-dev \
+  zlib1g-dev \
+  libxslt1-dev \
+  wget libgd-dev \
+  libgeoip-dev \
+  libperl-dev \
+  apache2-utils
 
 WORKDIR /usr/src
-RUN wget https://nginx.org/download/nginx-${NGINX_VER}.tar.gz -O /usr/src/nginx-${NGINX_VER}.tar.gz
-RUN wget https://github.com/arut/nginx-dav-ext-module/archive/v${NGINX_DAV_EXT_VER}.tar.gz -O /usr/src/nginx-dav-ext-module-v${NGINX_DAV_EXT_VER}.tar.gz
-RUN wget https://github.com/aperezdc/ngx-fancyindex/archive/v${NGINX_FANCYINDEX_VER}.tar.gz -O /usr/src/ngx-fancyindex-v${NGINX_FANCYINDEX_VER}.tar.gz
-RUN wget https://github.com/openresty/headers-more-nginx-module/archive/v${HEADERS_MORE_VER}.tar.gz -O /usr/src/headers-more-nginx-module-v${HEADERS_MORE_VER}.tar.gz
-RUN ls *.gz | xargs -n1 tar -xzf
+RUN wget https://nginx.org/download/nginx-${NGINX_VER}.tar.gz -O /usr/src/nginx-${NGINX_VER}.tar.gz && \
+  wget https://github.com/arut/nginx-dav-ext-module/archive/v${NGINX_DAV_EXT_VER}.tar.gz \
+    -O /usr/src/nginx-dav-ext-module-v${NGINX_DAV_EXT_VER}.tar.gz && \
+  wget https://github.com/aperezdc/ngx-fancyindex/archive/v${NGINX_FANCYINDEX_VER}.tar.gz \
+    -O /usr/src/ngx-fancyindex-v${NGINX_FANCYINDEX_VER}.tar.gz && \
+  wget https://github.com/openresty/headers-more-nginx-module/archive/v${HEADERS_MORE_VER}.tar.gz \
+    -O /usr/src/headers-more-nginx-module-v${HEADERS_MORE_VER}.tar.gz && \
+  ls *.gz | xargs -n1 tar -xzf
 
-RUN ls /usr/src
 WORKDIR /usr/src/nginx-${NGINX_VER}
 RUN ./configure --prefix=/etc/nginx \
   --sbin-path=/usr/sbin/nginx \
