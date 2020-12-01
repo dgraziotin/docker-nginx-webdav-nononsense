@@ -10,9 +10,10 @@ fi
 
 # Add password hash, unless /etc/nginx/htpasswd already exists (ie, bind mounted).
 if [ ! -e "/etc/nginx/htpasswd" ]; then
-  touch "/user.passwd"
+  touch "/etc/nginx/htpasswd"
   if [ "x$WEBDAV_USERNAME" != "x" ] && [ "x$WEBDAV_PASSWORD" != "x" ]; then
     htpasswd -bc /etc/nginx/htpasswd $WEBDAV_USERNAME $WEBDAV_PASSWORD
+    # root /data/$remote_user;
   else
     # no auth
     sed -i 's%auth_basic "Restricted";% %g' /etc/nginx/nginx.conf
