@@ -1,0 +1,19 @@
+version: '3.3'
+services:
+    nginxwebdav:
+        container_name: nginxwebdav
+        build:
+            context: .
+        volumes:
+            - ./data:/data
+            - ./htpasswd:/etc/nginx/htpasswd
+        environment:
+            - PUID=501
+            - PGID=20
+            - TZ=Europe/Berlin
+            - WEBDAV_USERNAME=user
+            - WEBDAV_PASSWORD=password
+            - SERVER_NAMES=localhost
+        ports:
+          - 32080:80
+        

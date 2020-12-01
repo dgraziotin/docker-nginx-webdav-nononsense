@@ -1,6 +1,6 @@
 # Builds a modern no-nonsense WEBDAV system with NGINX, to be put in front of a reverse proxy for SSL
 # Based on linuxserver.io Ubuntu, so all their magic is here, too.
-# Inspired (=copy paste) by https://www.robpeck.com/2020/06/making-webdav-actually-work-on-nginx/ 
+# Inspired (= copy paste) by https://www.robpeck.com/2020/06/making-webdav-actually-work-on-nginx/ 
 #   Go buy something from [their Amazon.com wishlist](https://www.amazon.com/hz/wishlist/ls/2XJI6HVS09C4J)
 #   Added small fixes for future upgrades and dependencies
 # FAQ: 
@@ -109,11 +109,14 @@ RUN make -j${MAKE_THREADS} && \
   rm -rf /usr/src/*
 
 VOLUME /data
+VOLUME /config
+
 EXPOSE 80
 
 COPY nginx.conf /etc/nginx/
 
-RUN mkdir -p /var/cache/nginx/client_temp \
+RUN mkdir -p /etc/nginx/logs \
+  /var/cache/nginx/client_temp \
   /var/cache/nginx/fastcgi_temp \
   /var/cache/nginx/proxy_temp \
   /var/cache/nginx/scgi_temp \

@@ -1,6 +1,6 @@
 #!/usr/bin/with-contenv bash
 
-# Configure vhosts.
+# vhosts
 # inspired from (= copy paste) from https://github.com/BytemarkHosting/docker-webdav
 if [ "x$SERVER_NAMES" != "x" ]; then
     # Replace commas with spaces
@@ -8,7 +8,7 @@ if [ "x$SERVER_NAMES" != "x" ]; then
     sed -i "s/localhost/$SERVER_ALIAS/g" /etc/nginx/nginx.conf
 fi
 
-# Add password hash, unless /etc/nginx/htpasswd already exists (ie, bind mounted).
+# Add password hash, unless /etc/nginx/htpasswd already exists (bind mounted).
 if [ ! -e "/etc/nginx/htpasswd" ]; then
   touch "/etc/nginx/htpasswd"
   if [ "x$WEBDAV_USERNAME" != "x" ] && [ "x$WEBDAV_PASSWORD" != "x" ]; then
