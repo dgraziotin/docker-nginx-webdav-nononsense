@@ -53,6 +53,8 @@ networks:
          name: reverseproxy
 ```
 
+Consider also un-exposing the port if you use a reverse proxy.
+
 # Feature requests
 
 I will add features if I happen to need them. To name one, I do not need native SSL support, because I use a reverse proxy.
