@@ -21,14 +21,6 @@ if [ ! -e "/etc/nginx/htpasswd" ]; then
   fi
 fi
 
-# vhosts
-# inspired from (= copy paste) from https://github.com/BytemarkHosting/docker-webdav
-if [ "x$SERVER_NAMES" != "x" ]; then
-    # Replace commas with spaces
-    SERVER_ALIAS="`printf '%s\n' "$SERVER_NAMES" | tr ',' ' '`"
-    sed -i "s/localhost/$SERVER_ALIAS/g" /etc/nginx/nginx.conf
-fi
-
 # timeouts
 if [ "x$TIMEOUTS_S" != "x" ]; then
     # Replace commas with spaces
