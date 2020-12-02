@@ -1,6 +1,6 @@
 # README
 
-docker-nginx-webdav-nononsense is a Docker image that enables a no-nonsense WebDAV system on the latest available nginx mainline.
+docker-nginx-webdav-nononsense aims to be a Docker image that enables a no-nonsense WebDAV system on the latest available nginx mainline.
 The image and resulting container is designed to run behind a reverse proxy (e.g., the great (jc21/nginx-proxy-manager)[https://github.com/jc21/nginx-proxy-manager]) to handle SSL. So, it runs on port 80 internally.
 
 ## Why no-nonsense?
