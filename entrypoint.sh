@@ -20,3 +20,23 @@ if [ ! -e "/etc/nginx/htpasswd" ]; then
     sed -i 's%auth_basic_user_file htpasswd;% %g' /etc/nginx/nginx.conf
   fi
 fi
+
+# vhosts
+# inspired from (= copy paste) from https://github.com/BytemarkHosting/docker-webdav
+if [ "x$SERVER_NAMES" != "x" ]; then
+    # Replace commas with spaces
+    SERVER_ALIAS="`printf '%s\n' "$SERVER_NAMES" | tr ',' ' '`"
+    sed -i "s/localhost/$SERVER_ALIAS/g" /etc/nginx/nginx.conf
+fi
+
+# timeouts
+if [ "x$TIMEOUTS_MS" != "x" ]; then
+    # Replace commas with spaces
+    sed -i "s/3600/$TIMEOUTS_MS/g" /etc/nginx/nginx.conf
+fi
+
+# max upload
+if [ "x$CLIENT_MAX_BODY_SIZE" != "x" ]; then
+    # Replace commas with spaces
+    sed -i "s/10G/$CLIENT_MAX_BODY_SIZE/g" /etc/nginx/nginx.conf
+fi
