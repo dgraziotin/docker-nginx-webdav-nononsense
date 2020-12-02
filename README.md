@@ -1,7 +1,7 @@
 # README
 
-docker-nginx-webdav-nononsense aims to be a Docker image that enables a no-nonsense WebDAV system on the latest available nginx mainline.
-The image and resulting container is designed to run behind a reverse proxy (e.g., the great (jc21/nginx-proxy-manager)[https://github.com/jc21/nginx-proxy-manager]) to handle SSL. So, it runs on port 80 internally.
+[docker-nginx-webdav-nononsense](https://github.com/dgraziotin/docker-nginx-webdav-nononsense) aims to be a Docker image that enables a no-nonsense WebDAV system on the latest available nginx mainline.
+The image and resulting container is designed to run behind a reverse proxy (e.g., the great [jc21/nginx-proxy-manager](https://github.com/jc21/nginx-proxy-manager)) to handle SSL. So, it runs on port 80 internally.
 
 ## Why no-nonsense?
 
@@ -15,7 +15,7 @@ Here is what I think sets it apart from other nginx Docker images.
   2. Includes the latest [headers-more-nginx-module](https://github.com/openresty/headers-more-nginx-module) to handle broken and weird clients.
   3. Includes the latest [ngx-fancyindex](https://github.com/aperezdc/ngx-fancyindex) to make directory listing look good.
 - No more [NSPOSIXErrorDomain:100 Error](https://megamorf.gitlab.io/2019/08/27/safari-nsposixerrordomain-100-error-with-nginx-and-apache/) with Safari 14+ on MacOS and on iOS 14+.
-- Works (AFAIK) out of the box with (jc21/nginx-proxy-manager)[https://github.com/jc21/nginx-proxy-manager], no "Advanced" configuration needed, no `proxy_hide_header Upgrade;` needed.
+- Works (AFAIK) out of the box with [jc21/nginx-proxy-manager](https://github.com/jc21/nginx-proxy-manager), no "Advanced" configuration needed, no `proxy_hide_header Upgrade;` needed.
 - CORS headers are all set.
 - Some good configuration settings are automatized through env variables (see below).
 
@@ -44,7 +44,7 @@ These are environment variables you can set, and what they do.
 - Pull and run my docker image dgraziotin/nginx-webdav-nononsense and use it with docker-compose or docker.
 
 If you are using a reverse proxy (you should!) do not forget to connect the container to the reverse proxy. Follow the instructions of your reverse proxy.
-With (jc21/nginx-proxy-manager)[https://github.com/jc21/nginx-proxy-manager], I add the following to the docker-compose.yml:
+With [jc21/nginx-proxy-manager](https://github.com/jc21/nginx-proxy-manager), I add the following to the docker-compose.yml:
 
 ```
 networks:
