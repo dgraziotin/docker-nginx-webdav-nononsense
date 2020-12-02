@@ -30,9 +30,9 @@ if [ "x$SERVER_NAMES" != "x" ]; then
 fi
 
 # timeouts
-if [ "x$TIMEOUTS_MS" != "x" ]; then
+if [ "x$TIMEOUTS_S" != "x" ]; then
     # Replace commas with spaces
-    sed -i "s/3600/$TIMEOUTS_MS/g" /etc/nginx/nginx.conf
+    sed -i "s/3600/$TIMEOUTS_S/g" /etc/nginx/nginx.conf
 fi
 
 # max upload

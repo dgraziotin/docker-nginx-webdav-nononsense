@@ -1,10 +1,10 @@
-# Builds a modern no-nonsense WEBDAV system with NGINX, to be put in front of a reverse proxy for SSL
+# Builds a modern no-nonsense WebDAV system with NGINX, to be put in front of a reverse proxy for SSL.
 # Based on linuxserver.io Ubuntu, so all their magic is here, too.
 # Inspired (= copy paste) by https://www.robpeck.com/2020/06/making-webdav-actually-work-on-nginx/ 
 #   Go buy something from [their Amazon.com wishlist](https://www.amazon.com/hz/wishlist/ls/2XJI6HVS09C4J)
 #   Added small fixes for future upgrades and dependencies
 # FAQ: 
-# Q: Will you add SSL? N: No, I can't bother, I use a reverse proxy. Pull requests are welcome!
+# Q: Will you add SSL? N: No, I can't bother, I use a reverse proxy. Pull requests are however welcome!
 
 FROM ghcr.io/linuxserver/baseimage-ubuntu:2121cada-ls3
 
