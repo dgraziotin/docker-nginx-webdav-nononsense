@@ -33,7 +33,7 @@ These are environment variables you can set, and what they do.
 - `TZ=Europe/Berlin` specifies timezone for the underlying GNU/Linux system.
 - `WEBDAV_USERNAME=user` to set a single username to access WebDAV. Ignored if `WEBDAV_PASSWORD`is not set, ignored if `./htpasswd:/etc/nginx/htpasswd` is mounted.
 - `WEBDAV_PASSWORD=password` to set the password to the single username to access WebDAV. Ignored if `WEBDAV_USERNAME`is not set, ignored if `./htpasswd:/etc/nginx/htpasswd` is mounted.
-- `SERVER_NAMES=localhost,ineed.coffee` comma separate hostnames for the server. 
+- `SERVER_NAMES=localhost,ineed.coffee` comma separated hostnames for the server. 
 - `TIMEOUTS_S=1200` expressed as seconds, sets at the same time various nginx timeouts: `send_timeout`, `client_body_timeout`, `keepalive_timeout`, `lingering_timeout`.
 - `CLIENT_MAX_BODY_SIZE=120M` limits file upload size to the expressed value, which must end wither with `M`(egabytes) or `G`(igabytes).
 
