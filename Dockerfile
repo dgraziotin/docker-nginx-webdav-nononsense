@@ -10,7 +10,7 @@ FROM ghcr.io/linuxserver/baseimage-ubuntu:2121cada-ls3
 
 LABEL maintainer="Daniel Graziotin, daniel@ineed.coffee"
 
-ENV NGINX_VER 1.19.5
+ENV NGINX_VER 1.19.6
 ENV NGINX_DAV_EXT_VER 3.0.0
 ENV NGINX_FANCYINDEX_VER 0.5.1
 ENV HEADERS_MORE_VER 0.33
