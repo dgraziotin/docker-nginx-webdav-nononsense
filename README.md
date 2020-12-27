@@ -1,7 +1,8 @@
 # README
 
-[docker-nginx-webdav-nononsense](https://github.com/dgraziotin/docker-nginx-webdav-nononsense) aims to be a Docker image that enables a no-nonsense WebDAV system on the latest available nginx mainline.
-The image and resulting container is designed to run behind a reverse proxy (e.g., the great [jc21/nginx-proxy-manager](https://github.com/jc21/nginx-proxy-manager)) to handle SSL. So, it runs on port 80 internally.
+[docker-nginx-webdav-nononsense](https://github.com/dgraziotin/docker-nginx-webdav-nononsense) aims to be a Docker image that enables a no-nonsense WebDAV system on the latest available nginx, stable and mainline.
+
+The image, and resulting container, is designed to run behind a reverse proxy (e.g., the great [jc21/nginx-proxy-manager](https://github.com/jc21/nginx-proxy-manager)) to handle SSL. So, it runs on port 80 internally.
 
 ## Why no-nonsense?
 
@@ -41,7 +42,7 @@ These are environment variables you can set, and what they do.
 
 - Clone this repository, edit the included docker-compose.yml, and run `docker-compose build && docker-compose up` to build and run the container. Access it from http://localhost:32080; or
 - Build the Dockerfile and run the container with docker; or
-- Pull and run my docker image dgraziotin/nginx-webdav-nononsense and use it with docker-compose or docker.
+- Pull and run my docker image [dgraziotin/nginx-webdav-nononsense](https://hub.docker.com/repository/docker/dgraziotin/nginx-webdav-nononsense) and use it with docker-compose or docker.
 
 If you are using a reverse proxy (you should!) do not forget to connect the container to the reverse proxy. Follow the instructions of your reverse proxy.
 With [jc21/nginx-proxy-manager](https://github.com/jc21/nginx-proxy-manager), I add the following to the docker-compose.yml:
