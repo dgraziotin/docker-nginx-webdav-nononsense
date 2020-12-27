@@ -55,7 +55,7 @@ RUN ./configure --prefix=/etc/nginx \
   --user=nginx \
   --group=nginx \
   --build=Ubuntu \
-  --builddir=nginx-1.19.0 \
+  --builddir=nginx-${NGINX_VER} \
   --with-select_module \
   --with-poll_module \
   --with-threads \
