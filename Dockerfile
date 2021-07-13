@@ -6,11 +6,11 @@
 # FAQ: 
 # Q: Will you add SSL? N: No, I can't bother, I use a reverse proxy. Pull requests are however welcome!
 
-FROM ghcr.io/linuxserver/baseimage-ubuntu:2121cada-ls3
+FROM ghcr.io/linuxserver/baseimage-ubuntu:focal-version-a5bbd122
 
 LABEL maintainer="Daniel Graziotin, daniel@ineed.coffee"
 
-ARG NGINX_VER_ARG=1.21.0
+ARG NGINX_VER_ARG=1.21.1
 ENV NGINX_VER=$NGINX_VER_ARG 
 ENV NGINX_DAV_EXT_VER 3.0.0
 ENV NGINX_FANCYINDEX_VER 0.5.1
@@ -123,7 +123,11 @@ RUN mkdir -p /etc/nginx/logs \
   /var/cache/nginx/scgi_temp \
   /var/cache/nginx/uwsgi_temp \
   && chmod 700 /var/cache/nginx/* \
-  && chown abc:abc /var/cache/nginx/*
+  && chown abc:abc /var/cache/nginx/* \
+  # from https://github.com/nginxinc/docker-nginx
+  # forward request and error logs to docker log collector
+  && ln -sf /dev/stdout /var/log/nginx/access.log \
+  && ln -sf /dev/stderr /var/log/nginx/error.log
 
 COPY entrypoint.sh /
 RUN chmod +x /entrypoint.sh
