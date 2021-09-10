@@ -1,4 +1,4 @@
-#!/usr/bin/with-contenv bash
+#!/bin/bash
 
 # vhosts
 # inspired from (= copy paste) from https://github.com/BytemarkHosting/docker-webdav
@@ -32,3 +32,5 @@ if [ "x$CLIENT_MAX_BODY_SIZE" != "x" ]; then
     # Replace commas with spaces
     sed -i "s/10G/$CLIENT_MAX_BODY_SIZE/g" /etc/nginx/nginx.conf
 fi
+
+exec "$@"

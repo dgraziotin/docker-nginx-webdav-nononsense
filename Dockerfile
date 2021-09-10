@@ -6,7 +6,7 @@
 # FAQ: 
 # Q: Will you add SSL? N: No, I can't bother, I use a reverse proxy. Pull requests are however welcome!
 
-FROM ghcr.io/linuxserver/baseimage-ubuntu:focal-version-a5bbd122
+FROM ghcr.io/linuxserver/baseimage-ubuntu:focal-version-a5bbd122 AS builder
 
 LABEL maintainer="Daniel Graziotin, daniel@ineed.coffee"
 
@@ -22,18 +22,22 @@ ENV LANG C.UTF-8
 ENV APT_LISTCHANGES_FRONTEND none
 
 RUN apt-get update && \
-  apt-get -y install build-essential \
-  libcurl4-openssl-dev \
-  libxml2-dev mime-support \
+  apt-get -y install --no-install-recommends \
+  apache2-utils \
   automake \
-  libssl-dev \
-  libpcre3-dev \
-  zlib1g-dev \
-  libxslt1-dev \
-  wget libgd-dev \
+  build-essential \
+  libcurl4-openssl-dev \
+  libgd-dev \
   libgeoip-dev \
+  libpcre3-dev \
   libperl-dev \
-  apache2-utils
+  libssl-dev \
+  libxml2-dev \
+  libxslt1-dev \
+  mime-support \
+  wget \
+  zlib1g-dev && \
+  apt-get -y autoclean
 
 WORKDIR /usr/src
 RUN wget https://nginx.org/download/nginx-${NGINX_VER}.tar.gz -O /usr/src/nginx-${NGINX_VER}.tar.gz && \
@@ -43,7 +47,7 @@ RUN wget https://nginx.org/download/nginx-${NGINX_VER}.tar.gz -O /usr/src/nginx-
     -O /usr/src/ngx-fancyindex-v${NGINX_FANCYINDEX_VER}.tar.gz && \
   wget https://github.com/openresty/headers-more-nginx-module/archive/v${HEADERS_MORE_VER}.tar.gz \
     -O /usr/src/headers-more-nginx-module-v${HEADERS_MORE_VER}.tar.gz && \
-  ls *.gz | xargs -n1 tar -xzf
+  /bin/bash -c "set -o pipefail && ls *.gz | xargs -n1 tar -xzf"
 
 WORKDIR /usr/src/nginx-${NGINX_VER}
 RUN ./configure --prefix=/etc/nginx \
@@ -57,57 +61,77 @@ RUN ./configure --prefix=/etc/nginx \
   --group=nginx \
   --build=Ubuntu \
   --builddir=nginx-${NGINX_VER} \
-  --with-select_module \
-  --with-poll_module \
-  --with-threads \
+  --http-client-body-temp-path=/var/cache/nginx/client_temp \
+  --http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp \
+  --http-log-path=/var/log/nginx/access.log \
+  --http-proxy-temp-path=/var/cache/nginx/proxy_temp \
+  --http-scgi-temp-path=/var/cache/nginx/scgi_temp \
+  --http-uwsgi-temp-path=/var/cache/nginx/uwsgi_temp \
+  --with-compat \
+  --with-debug \
   --with-file-aio \
-  --with-http_ssl_module \
-  --with-http_v2_module \
-  --with-http_realip_module \
   --with-http_addition_module \
-  --with-http_xslt_module=dynamic \
-  --with-http_image_filter_module=dynamic \
-  --with-http_geoip_module=dynamic \
-  --with-http_sub_module \
+  --with-http_auth_request_module \
   --with-http_dav_module \
+  --with-http_degradation_module \
   --with-http_flv_module \
-  --with-http_mp4_module \
+  --with-http_geoip_module=dynamic \
   --with-http_gunzip_module \
   --with-http_gzip_static_module \
-  --with-http_auth_request_module \
-  --with-http_random_index_module \
-  --with-http_secure_link_module \
-  --with-http_degradation_module \
-  --with-http_slice_module \
-  --with-http_stub_status_module \
+  --with-http_image_filter_module=dynamic \
+  --with-http_mp4_module \
   --with-http_perl_module=dynamic \
-  --with-perl_modules_path=/usr/share/perl/5.26.1 \
-  --with-perl=/usr/bin/perl \
-  --http-log-path=/var/log/nginx/access.log \
-  --http-client-body-temp-path=/var/cache/nginx/client_temp \
-  --http-proxy-temp-path=/var/cache/nginx/proxy_temp \
-  --http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp \
-  --http-uwsgi-temp-path=/var/cache/nginx/uwsgi_temp \
-  --http-scgi-temp-path=/var/cache/nginx/scgi_temp \
-  --with-mail=dynamic \
+  --with-http_random_index_module \
+  --with-http_realip_module \
+  --with-http_secure_link_module \
+  --with-http_slice_module \
+  --with-http_ssl_module \
+  --with-http_stub_status_module \
+  --with-http_sub_module \
+  --with-http_v2_module \
+  --with-http_xslt_module=dynamic \
   --with-mail_ssl_module \
-  --with-stream=dynamic \
-  --with-stream_ssl_module \
-  --with-stream_realip_module \
-  --with-stream_geoip_module=dynamic \
-  --with-stream_ssl_preread_module \
-  --with-compat \
+  --with-mail=dynamic \
+  --with-openssl-opt=no-nextprotoneg \
   --with-pcre \
   --with-pcre-jit \
-  --with-openssl-opt=no-nextprotoneg \
-  --with-debug \
+  --with-perl_modules_path=/usr/share/perl/5.26.1 \
+  --with-perl=/usr/bin/perl \
+  --with-poll_module \
+  --with-select_module \
+  --with-stream_geoip_module=dynamic \
+  --with-stream_realip_module \
+  --with-stream_ssl_module \
+  --with-stream_ssl_preread_module \
+  --with-stream=dynamic \
+  --with-threads \
   --add-module=/usr/src/nginx-dav-ext-module-${NGINX_DAV_EXT_VER} \
   --add-module=/usr/src/ngx-fancyindex-${NGINX_FANCYINDEX_VER} \
   --add-module=/usr/src/headers-more-nginx-module-${HEADERS_MORE_VER}
 
 RUN make -j${MAKE_THREADS} && \
-  make install && \
-  rm -rf /usr/src/*
+  make install
+
+FROM ghcr.io/linuxserver/baseimage-ubuntu:focal-version-a5bbd122
+COPY --from=builder /etc/nginx /etc/nginx
+COPY --from=builder /usr/lib/nginx/modules/ /usr/lib/nginx/modules/
+COPY --from=builder /usr/sbin/nginx /usr/sbin/nginx
+COPY --from=builder /var/log/nginx /var/log/nginx
+
+RUN apt-get update && \
+  apt-get -y install --no-install-recommends \
+  apache2-utils \
+  libcurl4-openssl-dev \
+  libgd-dev \
+  libgeoip-dev \
+  libpcre3-dev \
+  libperl-dev \
+  libssl-dev \
+  libxml2-dev \
+  libxslt1-dev \
+  mime-support \
+  zlib1g-dev && \
+  apt-get -y autoclean
 
 VOLUME /data
 VOLUME /config
@@ -130,5 +154,7 @@ RUN mkdir -p /etc/nginx/logs \
   && ln -sf /dev/stderr /var/log/nginx/error.log
 
 COPY entrypoint.sh /
-RUN chmod +x /entrypoint.sh
-CMD /entrypoint.sh && nginx -g "daemon off;"
+
+WORKDIR /data
+ENTRYPOINT  ["/bin/bash", "/entrypoint.sh"]
+CMD ["/usr/sbin/nginx"]
