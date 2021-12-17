@@ -10,7 +10,7 @@ FROM ghcr.io/linuxserver/baseimage-ubuntu:focal-version-a5bbd122 AS builder
 
 LABEL maintainer="Daniel Graziotin, daniel@ineed.coffee"
 
-ARG NGINX_VER_ARG=1.20.2
+ARG NGINX_VER_ARG=1.21.4
 ENV NGINX_VER=$NGINX_VER_ARG 
 ENV NGINX_DAV_EXT_VER 3.0.0
 ENV NGINX_FANCYINDEX_VER 0.5.1
