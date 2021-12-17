@@ -11,12 +11,14 @@ I'm taking it lightly: my own project is no-nonsense to me ;-) there is nothing 
 Here is what I think sets it apart from other nginx Docker images.
 
 - Based on [linuxserver.io](https://linuxserver.io) Ubuntu. All their magic is here, too, including their handling of user and group permission.
-- Takes inspiration (read: copy/pastes) all instructions by [Rob Peck to make WebDAV working well on nginx](https://www.robpeck.com/2020/06/making-webdav-actually-work-on-nginx/), which brings the following goodies:
+- Takes inspiration from [Rob Peck instructions to make WebDAV working well on nginx](https://www.robpeck.com/2020/06/making-webdav-actually-work-on-nginx/), which brings the following goodies:
   1. Includes the latest [nginx-dav-ext-module](https://github.com/arut/nginx-dav-ext-module) (enables PROPFIND, OPTIONS, LOCK, UNLOCK).
   2. Includes the latest [headers-more-nginx-module](https://github.com/openresty/headers-more-nginx-module) to handle broken and weird clients.
   3. Includes the latest [ngx-fancyindex](https://github.com/aperezdc/ngx-fancyindex) to make directory listing look good.
 - No more [NSPOSIXErrorDomain:100 Error](https://megamorf.gitlab.io/2019/08/27/safari-nsposixerrordomain-100-error-with-nginx-and-apache/) with Safari 14+ on MacOS and on iOS 14+.
-- Works (AFAIK) out of the box with [jc21/nginx-proxy-manager](https://github.com/jc21/nginx-proxy-manager), no "Advanced" configuration needed, no `proxy_hide_header Upgrade;` needed.
+- Works out of the box with [jc21/nginx-proxy-manager](https://github.com/jc21/nginx-proxy-manager), no "Advanced" configuration needed, no `proxy_hide_header Upgrade;` needed.
+- Works out of the box with macOS Finder.
+- Works out of the box with Microsoft Windows Explorer (tested on Windows 11) with fixes adapted from [here](http://netlab.dhis.org/wiki/ru:software:nginx:webdav).
 - CORS headers are all set.
 - Some good configuration settings are automatized through env variables (see below).
 
