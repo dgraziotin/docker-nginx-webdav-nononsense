@@ -18,7 +18,7 @@ Here is what I think sets it apart from other nginx Docker images.
 - No more [NSPOSIXErrorDomain:100 Error](https://megamorf.gitlab.io/2019/08/27/safari-nsposixerrordomain-100-error-with-nginx-and-apache/) with Safari 14+ on MacOS and on iOS 14+.
 - Works out of the box with [jc21/nginx-proxy-manager](https://github.com/jc21/nginx-proxy-manager), no "Advanced" configuration needed, no `proxy_hide_header Upgrade;` needed.
 - Works out of the box with macOS Finder.
-- Works out of the box with Microsoft Windows Explorer (tested on Windows 11) with fixes adapted from [here](http://netlab.dhis.org/wiki/ru:software:nginx:webdav).
+- Works out of the box with Microsoft Windows Explorer (tested on Windows 11) [with fixes](http://netlab.dhis.org/wiki/ru:software:nginx:webdav) adapted from [rozhuk-im](https://github.com/rozhuk-im).
 - CORS headers are all set.
 - Some good configuration settings are automatized through env variables (see below).
 
