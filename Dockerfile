@@ -6,7 +6,7 @@
 # FAQ: 
 # Q: Will you add SSL? N: No, I can't bother, I use a reverse proxy. Pull requests are however welcome!
 
-FROM ghcr.io/linuxserver/baseimage-ubuntu:focal-version-a5bbd122 AS builder
+FROM lscr.io/linuxserver/baseimage-ubuntu:focal AS builder
 
 LABEL maintainer="Daniel Graziotin, daniel@ineed.coffee"
 
@@ -112,7 +112,7 @@ RUN ./configure --prefix=/etc/nginx \
 RUN make -j${MAKE_THREADS} && \
   make install
 
-FROM ghcr.io/linuxserver/baseimage-ubuntu:focal-version-a5bbd122
+FROM lscr.io/linuxserver/baseimage-ubuntu:focal
 COPY --from=builder /etc/nginx /etc/nginx
 COPY --from=builder /usr/lib/nginx/modules/ /usr/lib/nginx/modules/
 COPY --from=builder /usr/sbin/nginx /usr/sbin/nginx
