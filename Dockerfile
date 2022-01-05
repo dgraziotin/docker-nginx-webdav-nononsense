@@ -153,8 +153,7 @@ RUN mkdir -p /etc/nginx/logs \
   && ln -sf /dev/stdout /var/log/nginx/access.log \
   && ln -sf /dev/stderr /var/log/nginx/error.log
 
-COPY entrypoint.sh /
+COPY /root /
 
 WORKDIR /data
-ENTRYPOINT  ["/bin/bash", "/entrypoint.sh"]
 CMD ["/usr/sbin/nginx"]
