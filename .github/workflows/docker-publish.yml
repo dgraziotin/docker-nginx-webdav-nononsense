@@ -9,8 +9,7 @@ on:
     branches: [ main ]
 
 env:
-  # github.repository as <account>/<repo>
-  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: ${{ github.actor }}/nginx-webdav-nononsense
 
 
 jobs:
