@@ -70,6 +70,13 @@ jobs:
           labels: |
             org.opencontainers.image.title=${{ env.IMAGE_NAME }}
             org.opencontainers.image.source=${{ github.repositoryUrl }}
+          tags: |
+            type=sha
+            type=schedule
+            type=ref,event=branch
+            type=ref,event=tag
+            type=ref,event=pr
+            type=pep440,pattern={{version}}
             
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
