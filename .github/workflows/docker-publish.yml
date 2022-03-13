@@ -67,8 +67,6 @@ jobs:
             ${{ env.IMAGE_NAME }}
             ghcr.io/${{ env.IMAGE_NAME }}
           tags: |
-            type=sha
-            type=schedule
             type=ref,event=branch
             type=ref,event=tag
             type=ref,event=pr
