@@ -62,3 +62,7 @@ Consider also un-exposing the port if you use a reverse proxy.
 
 I will add features if I happen to need them. To name one, I do not need native SSL support, because I use a reverse proxy.
 However, I welcome pull requests.
+
+# Credits
+
+Many thanks to [dotWee](https://github.com/dotWee) for adding awesome CI features to the repo!
