@@ -2,11 +2,8 @@ name: build & publish docker image
 
 on:
   push:
-    branches: [ main ]
-    # Publish semver tags as releases.
     tags: [ '*.*.*' ]
-  pull_request:
-    branches: [ main ]
+
 
 env:
   IMAGE_NAME: ${{ github.repository_owner }}/nginx-webdav-nononsense
