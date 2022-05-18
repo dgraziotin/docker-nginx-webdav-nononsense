@@ -44,7 +44,7 @@ These are environment variables you can set, and what they do.
 
 - Clone this repository, edit the included docker-compose.yml, and run `docker-compose build && docker-compose up` to build and run the container. Access it from http://localhost:32080; or
 - Build the Dockerfile and run the container with docker; or
-- Pull and run my docker image [dgraziotin/nginx-webdav-nononsense](https://hub.docker.com/repository/docker/dgraziotin/nginx-webdav-nononsense) and use it with docker-compose or docker.
+- Pull and run my docker image [dgraziotin/nginx-webdav-nononsense](https://hub.docker.com/r/dgraziotin/nginx-webdav-nononsense) and use it with docker-compose or docker.
 
 If you are using a reverse proxy (you should!) do not forget to connect the container to the reverse proxy. Follow the instructions of your reverse proxy.
 With [jc21/nginx-proxy-manager](https://github.com/jc21/nginx-proxy-manager), I add the following to the docker-compose.yml:
