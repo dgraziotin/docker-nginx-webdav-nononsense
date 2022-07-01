@@ -46,7 +46,8 @@ These are environment variables you can set, and what they do.
 - Build the Dockerfile and run the container with docker; or
 - Pull and run my docker image [dgraziotin/nginx-webdav-nononsense](https://hub.docker.com/r/dgraziotin/nginx-webdav-nononsense) and use it with docker-compose or docker.
 
-If you are using a reverse proxy (you should!) do not forget to connect the container to the reverse proxy. Follow the instructions of your reverse proxy.
+If you are using a reverse proxy (you should!), and the reverse proxy is containerized, do not forget to connect the container to the reverse proxy with a network. Follow the instructions of your reverse proxy.
+
 With [jc21/nginx-proxy-manager](https://github.com/jc21/nginx-proxy-manager), I add the following to the docker-compose.yml:
 
 ```
@@ -57,6 +58,14 @@ networks:
 ```
 
 Consider also un-exposing the port if you use a reverse proxy.
+
+Kindly note that this project is proxy-independent and requires you to be knowledgeable about reverse proxy to be used properly. 
+
+A reverse proxy, if misconfigured, could become the weaker link that prevents proper functioning of the WebDAV functionalities. 
+
+Examples include having the reverse configured with values for timeouts or max body size  that are less than the one nginx-webdav-nononsense uses. 
+
+Some proxies might not forward important headers from-and-to nginx-webdav-nononsense, and you may need to whitelist these headers manually. Finally, a reminder that Cloudfare is a reverse proxy with its settings and limitations ([example](https://community.cloudflare.com/t/does-the-100-mb-limit-apllies-to-all-users-on-my-website/297261/4)), some of which cannot be changed.
 
 # Feature requests
 
