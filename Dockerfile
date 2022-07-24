@@ -138,7 +138,7 @@ VOLUME /config
 
 EXPOSE 80
 
-COPY nginx.conf /etc/nginx/
+COPY nginx.conf /etc/nginx/nginx.conf
 
 RUN mkdir -p /etc/nginx/logs \
   /var/cache/nginx/client_temp \
@@ -156,4 +156,4 @@ RUN mkdir -p /etc/nginx/logs \
 COPY /root /
 
 WORKDIR /data
-CMD ["/usr/sbin/nginx"]
+#CMD ["/usr/sbin/nginx"] now started at /etc/services.d/nginx/run

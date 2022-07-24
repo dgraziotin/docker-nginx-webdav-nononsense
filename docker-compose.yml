@@ -1,4 +1,3 @@
-version: '3.3'
 services:
     nginxwebdav:
         container_name: nginxwebdav
@@ -6,6 +5,7 @@ services:
             context: .
         volumes:
             - ./data:/data
+            - ./config:/config
             - ./htpasswd:/etc/nginx/htpasswd
         environment:
             - PUID=501
@@ -17,5 +17,4 @@ services:
             - TIMEOUTS_S=1200 # these are seconds
             - CLIENT_MAX_BODY_SIZE=120M # must end with M(egabytes) or G(igabytes)
         ports:
-          - 32080:80
-        
+            - 32080:80
