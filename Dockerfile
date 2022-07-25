@@ -10,7 +10,7 @@ FROM lscr.io/linuxserver/baseimage-ubuntu:focal AS builder
 
 LABEL maintainer="Daniel Graziotin, daniel@ineed.coffee"
 
-ARG NGINX_VER_ARG=1.22.0
+ARG NGINX_VER_ARG=1.23.1
 ENV NGINX_VER=$NGINX_VER_ARG 
 ENV NGINX_DAV_EXT_VER 3.0.0
 ENV NGINX_FANCYINDEX_VER 0.5.1
@@ -138,7 +138,7 @@ VOLUME /config
 
 EXPOSE 80
 
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY nginx.conf /etc/nginx/
 
 RUN mkdir -p /etc/nginx/logs \
   /var/cache/nginx/client_temp \
@@ -156,4 +156,4 @@ RUN mkdir -p /etc/nginx/logs \
 COPY /root /
 
 WORKDIR /data
-#CMD ["/usr/sbin/nginx"] now started at /etc/services.d/nginx/run
+CMD ["/usr/sbin/nginx"]
