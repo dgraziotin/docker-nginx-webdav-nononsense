@@ -32,3 +32,8 @@ if [ ! -L /etc/nginx/conf.d/location.conf ]; then
     echo "Linking /config/nginx/location.conf to /etc/nginx/conf.d/"
     ln -s /config/nginx/location.conf /etc/nginx/conf.d/location.conf
 fi
+
+if [ -e /config/nginx/htpasswd ]; then
+    echo "Linking /config/nginx/htpasswd to /etc/nginx/htpasswd"
+    ln -s /config/nginx/htpasswd /etc/nginx
+fi
