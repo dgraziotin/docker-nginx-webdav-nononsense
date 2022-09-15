@@ -1,3 +1,4 @@
 data
-build.sh
+htpasswd
+build*.sh
 Dockerfile.template
