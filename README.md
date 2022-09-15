@@ -35,8 +35,8 @@ These are environment variables you can set, and what they do.
 - `PUID=1000` user id with read/write access to `./path/to/dir:/data` volume. Nginx will use the same to be able to read/write to the folder.
 - `PGID=1000` group id with read/write access to `./path/to/dir:/data` volume. Nginx will use the same to be able to read/write to the folder.
 - `TZ=Europe/Berlin` specifies timezone for the underlying GNU/Linux system.
-- `WEBDAV_USERNAME=user` to set a single username to access WebDAV. Ignored if `WEBDAV_PASSWORD`is not set, ignored if `/config/htpasswd` is provided.
-- `WEBDAV_PASSWORD=password` to set the password to the single username to access WebDAV. Ignored if `WEBDAV_USERNAME`is not set, ignored if `/config/htpasswd` is provided.
+- `WEBDAV_USERNAME=user` to set a single username to access WebDAV. Ignored if `WEBDAV_PASSWORD`is not set, ignored if `/config/nginx/htpasswd` is provided.
+- `WEBDAV_PASSWORD=password` to set the password to the single username to access WebDAV. Ignored if `WEBDAV_USERNAME`is not set, ignored if `/config/nginx/htpasswd` is provided.
 - `SERVER_NAMES=localhost,ineed.coffee` comma separated hostnames for the server. 
 - `TIMEOUTS_S=1200` expressed as seconds, sets at the same time various nginx timeouts: `send_timeout`, `client_body_timeout`, `keepalive_timeout`, `lingering_timeout`.
 - `CLIENT_MAX_BODY_SIZE=120M` limits file upload size to the expressed value, which must end wither with `M`(egabytes) or `G`(igabytes).
@@ -52,11 +52,11 @@ The container path `/config` is configured as unnamed/anonymous volume. Besides 
   - `/config/nginx/server.conf` included at the end of nginx.conf server directive.
   - `/config/nginx/http.conf` included at the end of nginx.conf location directive.
 
-Furthermore, if you provide an htpasswd file at `/config/htpasswd`, the container will use it for authentication.
+Furthermore, if you provide an htpasswd file at `/config/nginx/htpasswd`, the container will use it for authentication.
 Tha htpasswd is the [Apache HTTP compatible flat file to register usernames and passwords](https://httpd.apache.org/docs/2.4/programs/htpasswd.html). If you provide one, you can tell the container who your username and passwords are. 
 Please note that providing an htpasswd file will make the container ignore any supplied env variable `WEBDAV_USERNAME` and `WEBDAV_PASSWORD`.
 Please note that all users have the same access levels.
-Removing the file at `/config/htpasswd` will cause the container to use any provided `WEBDAV_USERNAME` and `WEBDAV_PASSWORD` variables.
+Removing the file at `/config/nginx/htpasswd` will cause the container to use any provided `WEBDAV_USERNAME` and `WEBDAV_PASSWORD` variables.
 
 # Usage
 
