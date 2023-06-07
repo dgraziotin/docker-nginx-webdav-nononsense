@@ -1,0 +1,4 @@
+#!/usr/bin/bash
+
+echo "change root from /data to /data/\$remote_user"
+sed -i 's%/data"%/data/$remote_user"%g' /etc/nginx/nginx.conf
