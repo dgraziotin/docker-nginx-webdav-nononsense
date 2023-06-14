@@ -6,6 +6,7 @@ services:
         volumes:
             - ./data:/data
             - ./config:/config
+            # - ./custom-cont-init.d:/custom-cont-init.d # optional: additional cont-init.d-scripts like multi-user support
         environment:
             - PUID=501
             - PGID=20
