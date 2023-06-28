@@ -2,3 +2,4 @@ data
 htpasswd
 build*.sh
 Dockerfile.template
+litmus*
