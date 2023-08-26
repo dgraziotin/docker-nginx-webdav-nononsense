@@ -10,7 +10,7 @@ FROM lscr.io/linuxserver/baseimage-ubuntu:focal AS builder
 
 LABEL maintainer="Daniel Graziotin, daniel@ineed.coffee"
 
-ARG NGINX_VER_ARG=1.25.1
+ARG NGINX_VER_ARG=1.25.2
 ENV NGINX_VER=$NGINX_VER_ARG 
 ENV NGINX_DAV_EXT_VER 3.0.0
 ENV NGINX_FANCYINDEX_VER 0.5.2
@@ -133,9 +133,6 @@ RUN apt-get update && \
   zlib1g-dev && \
   apt-get -y autoclean
 
-RUN mkdir /data \
-  && chown abc:abc /data
-
 VOLUME /data
 VOLUME /config
 
@@ -154,7 +151,7 @@ RUN mkdir -p /etc/nginx/logs \
   # from https://github.com/nginxinc/docker-nginx
   # forward request and error logs to docker log collector
   && ln -sf /dev/stdout /var/log/nginx/access.log \
-  && ln -sf /dev/stderr /var/log/nginx/error.log 
+  && ln -sf /dev/stderr /var/log/nginx/error.log
 
 COPY /root /
 
