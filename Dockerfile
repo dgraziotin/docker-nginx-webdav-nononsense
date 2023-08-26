@@ -133,6 +133,9 @@ RUN apt-get update && \
   zlib1g-dev && \
   apt-get -y autoclean
 
+RUN mkdir /data \
+  && chown abc:abc /data
+
 VOLUME /data
 VOLUME /config
 
@@ -151,7 +154,7 @@ RUN mkdir -p /etc/nginx/logs \
   # from https://github.com/nginxinc/docker-nginx
   # forward request and error logs to docker log collector
   && ln -sf /dev/stdout /var/log/nginx/access.log \
-  && ln -sf /dev/stderr /var/log/nginx/error.log
+  && ln -sf /dev/stderr /var/log/nginx/error.log 
 
 COPY /root /
 
