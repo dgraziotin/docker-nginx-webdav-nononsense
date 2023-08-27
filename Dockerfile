@@ -133,6 +133,9 @@ RUN apt-get update && \
   zlib1g-dev && \
   apt-get -y autoclean
 
+RUN mkdir /data \
+  && chown abc:abc /data
+
 VOLUME /data
 VOLUME /config
 
