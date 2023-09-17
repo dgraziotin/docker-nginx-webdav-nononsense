@@ -117,6 +117,12 @@ Some proxies might not forward important headers from-and-to nginx-webdav-nonons
 I will add features if I happen to need them. To name one, I do not need native SSL support, because I use a reverse proxy.
 However, I welcome pull requests.
 
+# Contributing to the Dockerfile
+
+I use a small build system (refer to build.sh) that generates and updates the Dockerfile with each new release of nginx. Dockerfiles are updated based on Dockerfile.template. 
+
+If you plan to submit a pull request that modifies a Dockerfile, please ensure that you make the changes on Dockerfile.template.
+
 # Credits
 
 Many thanks to [dotWee](https://github.com/dotWee) for adding awesome CI features to the repo.
