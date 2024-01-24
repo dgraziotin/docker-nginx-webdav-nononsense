@@ -10,7 +10,7 @@ LABEL maintainer="Daniel Graziotin, daniel@ineed.coffee"
 
 ARG NGINX_VER_ARG=1.25.3
 ENV NGINX_VER=$NGINX_VER_ARG 
-ENV NGINX_DAV_EXT_VER 3.0.0
+ENV NGINX_DAV_EXT_VER 4.0.1
 ENV NGINX_FANCYINDEX_VER 0.5.2
 ENV HEADERS_MORE_VER 0.34
 
@@ -39,7 +39,7 @@ RUN apt-get update && \
 
 WORKDIR /usr/src
 RUN wget https://nginx.org/download/nginx-${NGINX_VER}.tar.gz -O /usr/src/nginx-${NGINX_VER}.tar.gz && \
-  wget https://github.com/arut/nginx-dav-ext-module/archive/v${NGINX_DAV_EXT_VER}.tar.gz \
+  wget https://github.com/mid1221213/nginx-dav-ext-module/archive/v${NGINX_DAV_EXT_VER}.tar.gz \
     -O /usr/src/nginx-dav-ext-module-v${NGINX_DAV_EXT_VER}.tar.gz && \
   wget https://github.com/aperezdc/ngx-fancyindex/archive/v${NGINX_FANCYINDEX_VER}.tar.gz \
     -O /usr/src/ngx-fancyindex-v${NGINX_FANCYINDEX_VER}.tar.gz && \
