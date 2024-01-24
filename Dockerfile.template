@@ -1,3 +1,6 @@
+# I use a small build system (refer to build.sh) that generates and updates the Dockerfile with each new release of nginx. Dockerfiles are updated based on Dockerfile.template. 
+# If you plan to submit a pull request that modifies a Dockerfile, please ensure that you make the changes on Dockerfile.template.
+
 # Builds a modern no-nonsense WebDAV system with NGINX, to be put in front of a reverse proxy for SSL.
 # Based on linuxserver.io Ubuntu, so all their magic is here, too.
 # Inspired (= copy paste) by https://www.robpeck.com/2020/06/making-webdav-actually-work-on-nginx/ 
@@ -10,7 +13,7 @@ LABEL maintainer="Daniel Graziotin, daniel@ineed.coffee"
 
 ARG NGINX_VER_ARG=%%NGINX_VERSION%%
 ENV NGINX_VER=$NGINX_VER_ARG 
-ENV NGINX_DAV_EXT_VER 3.0.0
+ENV NGINX_DAV_EXT_VER 4.0.1
 ENV NGINX_FANCYINDEX_VER 0.5.2
 ENV HEADERS_MORE_VER 0.34
 
@@ -39,7 +42,7 @@ RUN apt-get update && \
 
 WORKDIR /usr/src
 RUN wget https://nginx.org/download/nginx-${NGINX_VER}.tar.gz -O /usr/src/nginx-${NGINX_VER}.tar.gz && \
-  wget https://github.com/arut/nginx-dav-ext-module/archive/v${NGINX_DAV_EXT_VER}.tar.gz \
+  wget https://github.com/mid1221213/nginx-dav-ext-module/archive/v${NGINX_DAV_EXT_VER}.tar.gz \
     -O /usr/src/nginx-dav-ext-module-v${NGINX_DAV_EXT_VER}.tar.gz && \
   wget https://github.com/aperezdc/ngx-fancyindex/archive/v${NGINX_FANCYINDEX_VER}.tar.gz \
     -O /usr/src/ngx-fancyindex-v${NGINX_FANCYINDEX_VER}.tar.gz && \

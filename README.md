@@ -13,7 +13,7 @@ Here is what I think sets it apart from other nginx Docker images.
 - Based on [linuxserver.io](https://linuxserver.io) Ubuntu. All their magic is here, too, including their handling of user and group permission.
   - Now with a working `/config` volume (see below).
 - Takes inspiration from [Rob Peck instructions to make WebDAV working well on nginx](https://www.robpeck.com/2020/06/making-webdav-actually-work-on-nginx/), which brings the following goodies:
-  1. Includes the latest [nginx-dav-ext-module](https://github.com/arut/nginx-dav-ext-module) (enables PROPFIND, OPTIONS, LOCK, UNLOCK).
+  1. Includes [mid1221213](https://github.com/mid1221213)'s fork of [nginx-dav-ext-module](https://github.com/mid1221213/nginx-dav-ext-module/) (enables PROPFIND, OPTIONS, LOCK, UNLOCK; deals with hidden folders, symlinks, and more).
   2. Includes the latest [headers-more-nginx-module](https://github.com/openresty/headers-more-nginx-module) to handle broken and weird clients.
   3. Includes the latest [ngx-fancyindex](https://github.com/aperezdc/ngx-fancyindex) to make directory listing look good.
 - No more [NSPOSIXErrorDomain:100 Error](https://megamorf.gitlab.io/2019/08/27/safari-nsposixerrordomain-100-error-with-nginx-and-apache/) with Safari 14+ on MacOS and on iOS 14+.
