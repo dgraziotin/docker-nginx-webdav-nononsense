@@ -7,7 +7,7 @@
 #   Go buy something from [their Amazon.com wishlist](https://www.amazon.com/hz/wishlist/ls/2XJI6HVS09C4J
 #  Added fixes and tweaks.
 
-FROM lscr.io/linuxserver/baseimage-ubuntu:focal AS builder
+FROM lscr.io/linuxserver/baseimage-ubuntu:jammy AS builder
 
 LABEL maintainer="Daniel Graziotin, daniel@ineed.coffee"
 
@@ -113,7 +113,7 @@ RUN ./configure --prefix=/etc/nginx \
 RUN make -j${MAKE_THREADS} && \
   make install
 
-FROM lscr.io/linuxserver/baseimage-ubuntu:focal
+FROM lscr.io/linuxserver/baseimage-ubuntu:jammy
 COPY --from=builder /etc/nginx /etc/nginx
 COPY --from=builder /usr/lib/nginx/modules/ /usr/lib/nginx/modules/
 COPY --from=builder /usr/sbin/nginx /usr/sbin/nginx
