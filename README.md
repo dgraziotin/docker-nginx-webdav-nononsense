@@ -23,35 +23,6 @@ Here is what I think sets it apart from other nginx Docker images.
 - CORS headers are all set.
 - Some good configuration settings are automatized through env variables (see below).
 
-# Quick start
-
-Assuming you want to setup a webdav server:
-
-1. saving data to your **host machine**'s `./dav1`, 
-2. with a user `user1` and password `password1`, 
-3. in the docker `detach` mode (background mode),
-4. using the host machine's host and port `127.0.0.1:8080`.
-
-The follow command should work:
-
-```bash
-mkdir -p ./dav1
-
-docker run \
-  -p 127.0.0.1:8080:80 \
-  --detach \
-  -v ./dav1:/data \
-  -e WEBDAV_USERNAME=user1 \
-  -e WEBDAV_PASSWORD=password1 \
-  -e PUID=1000 \
-  -e PGID=1000 \
-  dgraziotin/nginx-webdav-nononsense
-```
-
-Then you can visit the server using `http://127.0.0.1:8080`.
-
-Please read on for more info or more settings.
-
 # Settings
 
 Mount any of these two volumes:
@@ -115,6 +86,33 @@ WebDAV with basic login and custom folders per user tested with the integrated w
 
 
 # Usage
+
+# Usage
+
+## Quick test
+
+You can test this image quickly under the following assumptions:
+
+1. Data is saved on your **host machine**'s `./dav1` folder, 
+2. WebDAV is accessed by a user `user1` with password `password1`, 
+3. WebDAV is accessed on the host machine and port 8080: `127.0.0.1:8080`.
+
+```bash
+docker container run --rm \
+  -p 127.0.0.1:8080:80 \
+  -v ./dav1:/data \
+  -e WEBDAV_USERNAME=user1 \
+  -e WEBDAV_PASSWORD=password1 \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  dgraziotin/nginx-webdav-nononsense
+```
+
+Then you can visit the server using `http://127.0.0.1:8080`.
+
+You can exit the quick test by hitting `CTRL-C`. The container will exit and be removed.
+
+## Building the image or running it
 
 - Clone this repository, edit the included docker-compose.yml, and run `docker-compose build && docker-compose up` to build and run the container. Access it from http://localhost:32080; or
 - Build the Dockerfile and run the container with docker; or
