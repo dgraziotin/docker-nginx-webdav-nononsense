@@ -83,9 +83,32 @@ cont-init: info: /etc/cont-init.d/99-custom-files exited 0
 
 WebDAV with basic login and custom folders per user tested with the integrated web-client, [Filestash.app](https://github.com/mickael-kerjean/filestash), [Dolphin](https://docs.nextcloud.com/server/20/user_manual/en/files/access_webdav.html#accessing-files-with-kde-and-dolphin-file-manager) (KDE file manager; How-To from NextCloud documentation) and [Linux mount](https://docs.nextcloud.com/server/20/user_manual/en/files/access_webdav.html#creating-webdav-mounts-on-the-linux-command-line) (`davfs`; How-To from NextCloud documentation).
 
-
-
 # Usage
+
+## Quick test
+
+You can test this image quickly under the following assumptions:
+
+1. Data is saved on your **host machine**'s `./dav1` folder, 
+2. WebDAV is accessed by a user `user1` with password `password1`, 
+3. WebDAV is accessed on the host machine and port 8080: `127.0.0.1:8080`.
+
+```bash
+docker container run --rm \
+  -p 127.0.0.1:8080:80 \
+  -v ./dav1:/data \
+  -e WEBDAV_USERNAME=user1 \
+  -e WEBDAV_PASSWORD=password1 \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  dgraziotin/nginx-webdav-nononsense
+```
+
+Then you can visit the server using `http://127.0.0.1:8080`.
+
+You can exit the quick test by hitting `CTRL-C`. The container will exit and be removed.
+
+## Building the image or running it
 
 - Clone this repository, edit the included docker-compose.yml, and run `docker-compose build && docker-compose up` to build and run the container. Access it from http://localhost:32080; or
 - Build the Dockerfile and run the container with docker; or
