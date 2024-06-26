@@ -83,6 +83,10 @@ cont-init: info: /etc/cont-init.d/99-custom-files exited 0
 
 WebDAV with basic login and custom folders per user tested with the integrated web-client, [Filestash.app](https://github.com/mickael-kerjean/filestash), [Dolphin](https://docs.nextcloud.com/server/20/user_manual/en/files/access_webdav.html#accessing-files-with-kde-and-dolphin-file-manager) (KDE file manager; How-To from NextCloud documentation) and [Linux mount](https://docs.nextcloud.com/server/20/user_manual/en/files/access_webdav.html#creating-webdav-mounts-on-the-linux-command-line) (`davfs`; How-To from NextCloud documentation).
 
+## Further configuration
+
+See the [NGINX documentation]([url](https://nginx.org/en/docs/)) for further configuration (e.g. read-only mode via `limit_except` [from ngx_http_core_module](https://nginx.org/en/docs/http/ngx_http_core_module.html)).
+
 # Usage
 
 ## Quick test
