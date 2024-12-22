@@ -11,6 +11,14 @@ fi
 # Add password hash, unless /etc/nginx/htpasswd already exists (bind mounted).
 if [ ! -e "/etc/nginx/htpasswd" ]; then
   touch "/etc/nginx/htpasswd"
+  if [ "x$WEBDAV_PASSWORD_FILE" != "x" ]; then
+    if [ ! -f "$WEBDAV_PASSWORD_FILE" ]; then
+      echo "Error: Password file does not exist at $WEBDAV_PASSWORD_FILE" >&2
+      exit 1
+    fi
+    WEBDAV_PASSWORD="`cat "$WEBDAV_PASSWORD_FILE"`"
+  fi
+
   if [ "x$WEBDAV_USERNAME" != "x" ] && [ "x$WEBDAV_PASSWORD" != "x" ]; then
     htpasswd -bc /etc/nginx/htpasswd "$WEBDAV_USERNAME" "$WEBDAV_PASSWORD"
     # root /data/$remote_user;
