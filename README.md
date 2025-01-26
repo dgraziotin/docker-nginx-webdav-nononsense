@@ -36,7 +36,8 @@ These are environment variables you can set, and what they do.
 - `PGID=1000` group id with read/write access to `./path/to/dir:/data` volume. Nginx will use the same to be able to read/write to the folder.
 - `TZ=Europe/Berlin` specifies timezone for the underlying GNU/Linux system.
 - `WEBDAV_USERNAME=user` to set a single username to access WebDAV. Ignored if `WEBDAV_PASSWORD`is not set, ignored if `/config/nginx/htpasswd` is provided.
-- `WEBDAV_PASSWORD=password` to set the password to the single username to access WebDAV. Ignored if `WEBDAV_USERNAME`is not set, ignored if `/config/nginx/htpasswd` is provided.
+- `WEBDAV_PASSWORD=password` to set the password to the single username to access WebDAV. Ignored if `WEBDAV_USERNAME` is not set, ignored if `WEBDAV_PASSWORD_FILE` is set, ignored if `/config/nginx/htpasswd` is provided.
+- `WEBDAV_PASSWORD_FILE=/path/to/password-file` an alternative to `WEBDAV_PASSWORD` that will read its value from the specified file. This will override `WEBDAV_PASSWORD` if it is set. If the contents of the file are empty, auth will be disabled. Ignored if `WEBDAV_USERNAME` is not set, ignored if `/config/nginx/htpasswd` is provided.
 - `SERVER_NAMES=localhost,ineed.coffee` comma separated hostnames for the server. 
 - `TIMEOUTS_S=1200` expressed as seconds, sets at the same time various nginx timeouts: `send_timeout`, `client_body_timeout`, `keepalive_timeout`, `lingering_timeout`.
 - `CLIENT_MAX_BODY_SIZE=120M` limits file upload size to the expressed value, which must end wither with `M`(egabytes) or `G`(igabytes).
