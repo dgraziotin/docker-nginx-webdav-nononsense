@@ -2,7 +2,7 @@
 
 [docker-nginx-webdav-nononsense](https://github.com/dgraziotin/docker-nginx-webdav-nononsense) aims to be a Docker image that enables a no-nonsense WebDAV system on the latest available nginx, stable and mainline.
 
-The image, and resulting container, is designed to run behind a reverse proxy (e.g., the great [jc21/nginx-proxy-manager](https://github.com/jc21/nginx-proxy-manager)) to handle SSL. So, it runs on port 80 internally.
+The image, and resulting container, **is designed to run behind a reverse proxy** (see below).
 
 ## Why no-nonsense?
 
@@ -22,6 +22,21 @@ Here is what I think sets it apart from other nginx Docker images.
 - Works out of the box with Microsoft Windows Explorer (tested on Windows 11) [with fixes](http://netlab.dhis.org/wiki/ru:software:nginx:webdav) adapted from [rozhuk-im](https://github.com/rozhuk-im).
 - CORS headers are all set.
 - Some good configuration settings are automatized through env variables (see below).
+
+# Designed to run behind a reverse proxy
+
+The container is **not** designed to accomplish features that are usually dealt by a reverse proxy. In particular, there is no native support for:
+
+- SSL/TLS
+- Domains and subdomains
+- Non-root base paths (e.g., a subfolder)
+
+The container is designed to be served by a reverse proxy (two great examples are [jc21/nginx-proxy-manager](https://github.com/jc21/nginx-proxy-manager) and [caddy](https://caddyserver.com)), and it can be reached through the internal port 80. 
+
+Reverse proxies can implement the features described above and more. 
+
+It _is_ technically possible to implement all these features in my container by tweaking the configuration files (all accessible and exposed) as this is still nginx, a Web server. 
+The exposed configuration files are provided to speed up tweaking, but the features per se are not supported.
 
 # Settings
 
@@ -142,8 +157,7 @@ Some proxies might not forward important headers from-and-to nginx-webdav-nonons
 
 # Feature requests
 
-I will add features if I happen to need them. To name one, I do not need native SSL support, because I use a reverse proxy.
-However, I welcome pull requests.
+I will add features if I happen to need them. However, I welcome pull requests.
 
 # Contributing to the Dockerfile
 
