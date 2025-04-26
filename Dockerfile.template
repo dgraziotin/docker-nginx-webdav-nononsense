@@ -160,4 +160,3 @@ RUN mkdir -p /etc/nginx/logs \
 COPY /root /
 
 WORKDIR /data
-#CMD ["/usr/sbin/nginx"] now started from /etc/services.d/nginx/run
