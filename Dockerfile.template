@@ -160,3 +160,4 @@ RUN mkdir -p /etc/nginx/logs \
 COPY /root /
 
 WORKDIR /data
+
