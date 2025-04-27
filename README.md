@@ -12,6 +12,7 @@ Here is what I think sets it apart from other nginx Docker images.
 
 - Based on [linuxserver.io](https://linuxserver.io) Ubuntu. All their magic is here, too, including their handling of user and group permission.
   - Now with a working `/config` volume (see below).
+  - With [s6-overlay v3](https://github.com/just-containers/s6-overlay).
 - Takes inspiration from [Rob Peck instructions to make WebDAV working well on nginx](https://www.robpeck.com/2020/06/making-webdav-actually-work-on-nginx/), which brings the following goodies:
   1. Includes [mid1221213](https://github.com/mid1221213)'s fork of [nginx-dav-ext-module](https://github.com/mid1221213/nginx-dav-ext-module/) (enables PROPFIND, OPTIONS, LOCK, UNLOCK; deals with hidden folders, symlinks, and more).
   2. Includes the latest [headers-more-nginx-module](https://github.com/openresty/headers-more-nginx-module) to handle broken and weird clients.
@@ -61,8 +62,6 @@ These are environment variables you can set, and what they do.
 
 The container path `/config` is configured as unnamed/anonymous volume. Besides that, it contains the following paths and files:
 
-- `/config/custom-cont-init.d` to host [your own custom scripts that run at startup](https://www.linuxserver.io/blog/2019-09-14-customizing-our-containers#custom-scripts).
-- `/config/custom-services.d` to host [your own service files](https://www.linuxserver.io/blog/2019-09-14-customizing-our-containers#custom-services).
 - `/config/nginx` to host custom configuration files for nginx, namely:
   - `/config/nginx/http.conf` included at the end of nginx.conf http directive.
   - `/config/nginx/server.conf` included at the end of nginx.conf server directive.
