@@ -75,7 +75,7 @@ Removing the file at `/config/nginx/htpasswd` will cause the container to use an
 
 ## Custom scripts
 
-See [README-custom-scripts.md]. The file contains an example of custom scripting which enables multi user support.
+See [`README-custom-scripts.md`](README-custom-scripts.md). The file contains an example of custom scripting which enables multi user support.
 
 ## Further configuration
 
