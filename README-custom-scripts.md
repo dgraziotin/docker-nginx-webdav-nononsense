@@ -15,7 +15,7 @@ Be sure that:
 - A folder for each user (named exactly like the username) 
 - The right permissions (user/group of the nginx process) for these folders (as set with the env-variable)
 - Add a custom-cont-init.d script:
-	- Add a new volume in docker-compose: `./custom-cont-init.d:/custom-cont-init.d` (more details can be found in [The /config volume](#the-config-volume))
+	- Add a new volume in docker-compose: `./custom-cont-init.d:/custom-cont-init.d`
 	- ... with the custom script [`40-user_dir`](custom-cont-init.d/40-user-dir) (from this repository) 
 - (Re-)Create the container: `docker-compose up -d --force-recreate nginxwebdav`
 
