@@ -1,5 +1,7 @@
 #!/usr/bin/with-contenv sh
 
+echo "Running init-paths"
+
 mkdir -p /config/nginx
 mkdir -p /etc/nginx/conf.d
 

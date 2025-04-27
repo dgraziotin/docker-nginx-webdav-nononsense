@@ -1,6 +1,0 @@
-#!/usr/bin/with-contenv sh
-
-# Workaround to https://github.com/linuxserver/docker-baseimage-ubuntu/issues/173#issuecomment-2270698064
-
-chmod -R +x /etc/cont-init.d/
-chmod -R +x  /etc/services.d/

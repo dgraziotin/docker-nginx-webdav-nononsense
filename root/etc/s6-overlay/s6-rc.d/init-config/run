@@ -1,5 +1,7 @@
 #!/usr/bin/with-contenv bash
 
+echo "Running init-config"
+
 # vhosts
 # inspired from (= copy paste) from https://github.com/BytemarkHosting/docker-webdav
 if [ "x$SERVER_NAMES" != "x" ]; then
