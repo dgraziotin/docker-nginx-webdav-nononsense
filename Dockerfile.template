@@ -143,6 +143,7 @@ VOLUME /config
 EXPOSE 80
 
 COPY nginx.conf /etc/nginx/
+COPY findermetadata.conf /etc/nginx/conf.d/
 
 RUN mkdir -p /etc/nginx/logs \
   /var/cache/nginx/client_temp \

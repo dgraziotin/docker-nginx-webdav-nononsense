@@ -2,3 +2,4 @@
 data
 htpasswd
 litmus*
+config/nginx/findermetadata.conf

@@ -20,6 +20,11 @@ if [ ! -f /config/nginx/location.conf ]; then
     touch /config/nginx/location.conf
 fi
 
+if [ ! -f /config/nginx/findermetadata.conf ]; then
+    echo "Creating empty /config/nginx/findermetadata.conf"
+    touch /config/nginx/findermetadata.conf
+fi
+
 if [ ! -L /etc/nginx/conf.d/http.conf ]; then
     echo "Linking /config/nginx/http.conf to /etc/nginx/conf.d/"
     ln -s /config/nginx/http.conf /etc/nginx/conf.d/http.conf
@@ -33,6 +38,11 @@ fi
 if [ ! -L /etc/nginx/conf.d/location.conf ]; then
     echo "Linking /config/nginx/location.conf to /etc/nginx/conf.d/"
     ln -s /config/nginx/location.conf /etc/nginx/conf.d/location.conf
+fi
+
+if [ ! -L /etc/nginx/conf.d/findermetadata.conf ]; then
+    echo "Linking /config/nginx/findermetadata.conf to /etc/nginx/conf.d/"
+    ln -s /config/nginx/findermetadata.conf /etc/nginx/conf.d/findermetadata.conf
 fi
 
 if [ -e /config/nginx/htpasswd ]; then

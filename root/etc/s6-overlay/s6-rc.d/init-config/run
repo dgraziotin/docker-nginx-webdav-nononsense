@@ -42,3 +42,10 @@ if [ "x$CLIENT_MAX_BODY_SIZE" != "x" ]; then
     # Replace commas with spaces
     sed -i "s/10G/$CLIENT_MAX_BODY_SIZE/g" /etc/nginx/nginx.conf
 fi
+
+# suppress Finder metadata 
+if [ "x$ALLOW_FINDER_METADATA" = "x" ]; then
+  # This is executed when ALLOW_FINDER_METADATA is NOT defined 
+  # Suppress metadata files for macOS Finder
+  sed -i '/set $checkPropfind "";/a \    include conf.d/findermetadata.conf;' /etc/nginx/nginx.conf
+fi
