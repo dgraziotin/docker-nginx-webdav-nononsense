@@ -1,27 +1,28 @@
-#!/usr/bin/with-contenv bash
+#!/usr/bin/with-contenv sh
+# shellcheck shell=sh
 
 echo "Running init-config"
 
 # vhosts
 # inspired from (= copy paste) from https://github.com/BytemarkHosting/docker-webdav
-if [ "x$SERVER_NAMES" != "x" ]; then
+if [ -n "${SERVER_NAMES}" ]; then
     # Replace commas with spaces
-    SERVER_ALIAS="`printf '%s\n' "$SERVER_NAMES" | tr ',' ' '`"
+    SERVER_ALIAS="$(printf '%s\n' "$SERVER_NAMES" | tr ',' ' ')"
     sed -i "s/localhost/$SERVER_ALIAS/g" /etc/nginx/nginx.conf
 fi
 
 # Add password hash, unless /etc/nginx/htpasswd already exists (bind mounted).
 if [ ! -e "/etc/nginx/htpasswd" ]; then
   touch "/etc/nginx/htpasswd"
-  if [ "x$WEBDAV_PASSWORD_FILE" != "x" ]; then
+  if [ -n "${WEBDAV_PASSWORD_FILE}" ]; then
     if [ ! -f "$WEBDAV_PASSWORD_FILE" ]; then
       echo "Error: Password file does not exist at $WEBDAV_PASSWORD_FILE" >&2
       exit 1
     fi
-    WEBDAV_PASSWORD="`cat "$WEBDAV_PASSWORD_FILE"`"
+    WEBDAV_PASSWORD="$(cat "$WEBDAV_PASSWORD_FILE")"
   fi
 
-  if [ "x$WEBDAV_USERNAME" != "x" ] && [ "x$WEBDAV_PASSWORD" != "x" ]; then
+  if [ -n "${WEBDAV_USERNAME}" ] && [ -n "${WEBDAV_PASSWORD}" ]; then
     htpasswd -bc /etc/nginx/htpasswd "$WEBDAV_USERNAME" "$WEBDAV_PASSWORD"
     # root /data/$remote_user;
   else
@@ -32,19 +33,19 @@ if [ ! -e "/etc/nginx/htpasswd" ]; then
 fi
 
 # timeouts
-if [ "x$TIMEOUTS_S" != "x" ]; then
+if [ -n "${TIMEOUTS_S}" ]; then
     # Replace commas with spaces
     sed -i "s/3600/$TIMEOUTS_S/g" /etc/nginx/nginx.conf
 fi
 
 # max upload
-if [ "x$CLIENT_MAX_BODY_SIZE" != "x" ]; then
+if [ -n "${CLIENT_MAX_BODY_SIZE}" ]; then
     # Replace commas with spaces
     sed -i "s/10G/$CLIENT_MAX_BODY_SIZE/g" /etc/nginx/nginx.conf
 fi
 
 # suppress Finder metadata 
-if [ "x$ALLOW_FINDER_METADATA" = "x" ]; then
+if [ -n "${ALLOW_FINDER_METADATA}" ]; then
   # This is executed when ALLOW_FINDER_METADATA is NOT defined 
   # Suppress metadata files for macOS Finder
   sed -i '/set $checkPropfind "";/a \    include conf.d/findermetadata.conf;' /etc/nginx/nginx.conf
