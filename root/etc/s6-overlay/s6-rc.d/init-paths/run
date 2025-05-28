@@ -47,5 +47,5 @@ fi
 
 if [ -e /config/nginx/htpasswd ]; then
     echo "Linking /config/nginx/htpasswd to /etc/nginx/htpasswd"
-    ln -s /config/nginx/htpasswd /etc/nginx
+    ln -sf /config/nginx/htpasswd /etc/nginx
 fi
