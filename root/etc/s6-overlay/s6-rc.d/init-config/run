@@ -48,5 +48,7 @@ fi
 if [ -n "${ALLOW_FINDER_METADATA}" ]; then
   # This is executed when ALLOW_FINDER_METADATA is NOT defined 
   # Suppress metadata files for macOS Finder
-  sed -i '/set $checkPropfind "";/a \    include conf.d/findermetadata.conf;' /etc/nginx/nginx.conf
+  #sed -i '/set $checkPropfind "";/a \    include conf.d/findermetadata.conf;' /etc/nginx/nginx.conf
+  echo "Allow Finder metadata (not a default action)"
+  sed -i 's/^[[:space:]]*include conf\.d\/findermetadata\.conf;/#&/' /etc/nginx/nginx.conf
 fi

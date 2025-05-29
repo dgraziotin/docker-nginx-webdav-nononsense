@@ -57,7 +57,7 @@ These are environment variables you can set, and what they do.
 - `SERVER_NAMES=localhost,ineed.coffee` comma separated hostnames for the server. 
 - `TIMEOUTS_S=1200` expressed as seconds, sets at the same time various nginx timeouts: `send_timeout`, `client_body_timeout`, `keepalive_timeout`, `lingering_timeout`.
 - `CLIENT_MAX_BODY_SIZE=120M` limits file upload size to the expressed value, which must end wither with `M`(egabytes) or `G`(igabytes).
-- `ALLOW_FINDER_METADATA=1` will allow the by-default suppressed macOS Finder metadata (`_.*|DS_Store|Spotlight-V100|TemporaryItems|Trashes|hidden|localized`)
+- `ALLOW_FINDER_METADATA=1` will allow the **by-default suppressed** macOS Finder metadata (`_.*|DS_Store|Spotlight-V100|TemporaryItems|Trashes|hidden|localized`)
 ## The /config volume
 
 The container path `/config` is configured as unnamed/anonymous volume. Besides that, it contains the following paths and files:
