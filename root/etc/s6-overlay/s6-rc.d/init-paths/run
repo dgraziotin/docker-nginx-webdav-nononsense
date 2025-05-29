@@ -5,47 +5,37 @@ echo "Running init-paths"
 mkdir -p /config/nginx
 mkdir -p /etc/nginx/conf.d
 
-if [ ! -f /config/nginx/http.conf ]; then
+if [ ! -e /config/nginx/http.conf ]; then
     echo "Creating empty /config/nginx/http.conf"
     touch /config/nginx/http.conf
 fi
 
-if [ ! -f /config/nginx/server.conf ]; then
+if [ ! -e /config/nginx/server.conf ]; then
     echo "Creating empty /config/nginx/server.conf"
     touch /config/nginx/server.conf
 fi
 
-if [ ! -f /config/nginx/location.conf ]; then
+if [ ! -e /config/nginx/location.conf ]; then
     echo "Creating empty /config/nginx/location.conf"
     touch /config/nginx/location.conf
 fi
 
-if [ ! -f /config/nginx/findermetadata.conf ]; then
-    echo "Creating empty /config/nginx/findermetadata.conf"
-    touch /config/nginx/findermetadata.conf
-fi
-
-if [ ! -L /etc/nginx/conf.d/http.conf ]; then
+if [ ! -e /etc/nginx/conf.d/http.conf ]; then
     echo "Linking /config/nginx/http.conf to /etc/nginx/conf.d/"
     ln -s /config/nginx/http.conf /etc/nginx/conf.d/http.conf
 fi
 
-if [ ! -L /etc/nginx/conf.d/server.conf ]; then
+if [ ! -e /etc/nginx/conf.d/server.conf ]; then
     echo "Linking /config/nginx/server.conf to /etc/nginx/conf.d/"
     ln -s /config/nginx/server.conf /etc/nginx/conf.d/server.conf
 fi
 
-if [ ! -L /etc/nginx/conf.d/location.conf ]; then
+if [ ! -e /etc/nginx/conf.d/location.conf ]; then
     echo "Linking /config/nginx/location.conf to /etc/nginx/conf.d/"
     ln -s /config/nginx/location.conf /etc/nginx/conf.d/location.conf
 fi
 
-if [ ! -L /etc/nginx/conf.d/findermetadata.conf ]; then
-    echo "Linking /config/nginx/findermetadata.conf to /etc/nginx/conf.d/"
-    ln -s /config/nginx/findermetadata.conf /etc/nginx/conf.d/findermetadata.conf
-fi
-
 if [ -e /config/nginx/htpasswd ]; then
     echo "Linking /config/nginx/htpasswd to /etc/nginx/htpasswd"
-    ln -s /config/nginx/htpasswd /etc/nginx
+    ln -sf /config/nginx/htpasswd /etc/nginx
 fi
