@@ -65,7 +65,7 @@ The container path `/config` is configured as unnamed/anonymous volume. Besides 
 - `/config/nginx` to host custom configuration files for nginx, namely:
   - `/config/nginx/http.conf` included at the end of nginx.conf http directive.
   - `/config/nginx/server.conf` included at the end of nginx.conf server directive.
-  - `/config/nginx/http.conf` included at the end of nginx.conf location directive.
+  - `/config/nginx/location.conf` included at the end of nginx.conf location directive.
 
 Furthermore, if you provide an htpasswd file at `/config/nginx/htpasswd`, the container will use it for authentication.
 Tha htpasswd is the [Apache HTTP compatible flat file to register usernames and passwords](https://httpd.apache.org/docs/2.4/programs/htpasswd.html). If you provide one, you can tell the container who your username and passwords are. 
