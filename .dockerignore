@@ -1,0 +1,10 @@
+.git
+.github
+*.md
+docker-compose.yml
+data/
+config/
+litmus/
+htpasswd
+.DS_Store
+CLAUDE.md
