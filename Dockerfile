@@ -11,7 +11,7 @@ FROM lscr.io/linuxserver/baseimage-ubuntu:jammy AS builder
 
 LABEL maintainer="Daniel Graziotin, daniel@ineed.coffee"
 
-ARG NGINX_VER_ARG=1.27.5
+ARG NGINX_VER_ARG=1.29.0
 ENV NGINX_VER=$NGINX_VER_ARG 
 ENV NGINX_DAV_EXT_VER 4.0.1
 ENV NGINX_FANCYINDEX_VER 0.5.2
@@ -38,7 +38,8 @@ RUN apt-get update && \
   mime-support \
   wget \
   zlib1g-dev && \
-  apt-get -y autoclean
+  apt-get -y autoclean && \
+  rm -rf /var/lib/apt/lists/*
 
 WORKDIR /usr/src
 RUN wget https://nginx.org/download/nginx-${NGINX_VER}.tar.gz -O /usr/src/nginx-${NGINX_VER}.tar.gz && \
@@ -132,7 +133,8 @@ RUN apt-get update && \
   libxslt1-dev \
   mime-support \
   zlib1g-dev && \
-  apt-get -y autoclean
+  apt-get -y autoclean && \
+  rm -rf /var/lib/apt/lists/*
 
 RUN mkdir /data \
   && chown abc:abc /data
