@@ -11,7 +11,7 @@ FROM lscr.io/linuxserver/baseimage-ubuntu:jammy AS builder
 
 LABEL maintainer="Daniel Graziotin, daniel@ineed.coffee"
 
-ARG NGINX_VER_ARG=1.28.1
+ARG NGINX_VER_ARG=1.29.4
 ENV NGINX_VER=$NGINX_VER_ARG 
 ENV NGINX_DAV_EXT_VER 4.0.1
 ENV NGINX_FANCYINDEX_VER 0.5.2
