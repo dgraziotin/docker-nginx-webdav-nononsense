@@ -1,8 +1,7 @@
 services:
     nginxwebdav:
         container_name: nginxwebdav
-        build:
-            context: .
+        image: dgraziotin/nginx-webdav-nononsense:1.29.0
         volumes:
             - ./data:/data
             - ./config:/config
