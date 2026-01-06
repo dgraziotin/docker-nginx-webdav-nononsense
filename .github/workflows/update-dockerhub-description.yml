@@ -19,7 +19,7 @@ jobs:
       - uses: actions/checkout@v5
 
       - name: update docker hub repository description
-        uses: peter-evans/dockerhub-description@v4
+        uses: peter-evans/dockerhub-description@v5
         with:
           username: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
           password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
