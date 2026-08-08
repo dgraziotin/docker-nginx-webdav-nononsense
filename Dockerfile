@@ -43,13 +43,14 @@ RUN apt-get update && \
 
 WORKDIR /usr/src
 RUN wget https://nginx.org/download/nginx-${NGINX_VER}.tar.gz -O /usr/src/nginx-${NGINX_VER}.tar.gz && \
-  wget https://github.com/mid1221213/nginx-dav-ext-module/archive/v${NGINX_DAV_EXT_VER}.tar.gz \
+  wget https://github.com/dgraziotin/nginx-dav-ext-module/archive/refs/heads/master.tar.gz \
     -O /usr/src/nginx-dav-ext-module-v${NGINX_DAV_EXT_VER}.tar.gz && \
   wget https://github.com/aperezdc/ngx-fancyindex/archive/v${NGINX_FANCYINDEX_VER}.tar.gz \
     -O /usr/src/ngx-fancyindex-v${NGINX_FANCYINDEX_VER}.tar.gz && \
   wget https://github.com/openresty/headers-more-nginx-module/archive/v${HEADERS_MORE_VER}.tar.gz \
     -O /usr/src/headers-more-nginx-module-v${HEADERS_MORE_VER}.tar.gz && \
-  /bin/bash -c "set -o pipefail && ls *.gz | xargs -n1 tar -xzf"
+  /bin/bash -c "set -o pipefail && ls *.gz | xargs -n1 tar -xzf" && \
+  mv nginx-dav-ext-module-master nginx-dav-ext-module-${NGINX_DAV_EXT_VER}
 
 WORKDIR /usr/src/nginx-${NGINX_VER}
 RUN ./configure --prefix=/etc/nginx \
