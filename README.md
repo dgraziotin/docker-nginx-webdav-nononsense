@@ -14,7 +14,7 @@ Here is what I think sets it apart from other nginx Docker images.
   - Now with a working `/config` volume (see below).
   - With [s6-overlay v3](https://github.com/just-containers/s6-overlay).
 - Takes inspiration from [Rob Peck instructions to make WebDAV working well on nginx](https://www.robpeck.com/2020/06/making-webdav-actually-work-on-nginx/), which brings the following goodies:
-  1. Includes [mid1221213](https://github.com/mid1221213)'s fork of [nginx-dav-ext-module](https://github.com/mid1221213/nginx-dav-ext-module/) (enables PROPFIND, OPTIONS, LOCK, UNLOCK; deals with hidden folders, symlinks, and more).
+  1. Includes [dgraziotin](https://github.com/dgraziotin)'s fork of [nginx-dav-ext-module](https://github.com/dgraziotin/nginx-dav-ext-module/) (enables PROPFIND, OPTIONS, LOCK, UNLOCK; deals with hidden folders, symlinks, and more).
   2. Includes the latest [headers-more-nginx-module](https://github.com/openresty/headers-more-nginx-module) to handle broken and weird clients.
   3. Includes the latest [ngx-fancyindex](https://github.com/aperezdc/ngx-fancyindex) to make directory listing look good.
 - No more [NSPOSIXErrorDomain:100 Error](https://megamorf.gitlab.io/2019/08/27/safari-nsposixerrordomain-100-error-with-nginx-and-apache/) with Safari 14+ on MacOS and on iOS 14+.
